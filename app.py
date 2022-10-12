@@ -11,66 +11,70 @@ valid_rule = {
     }
 }
 
-data_dict = {"name":"Mero neupane ho","age":17}
+data_dict = {"name":"Mero Sagar neupane ho","age":16}
 
 
 def validate_string(key,data_dict, valid_rule):
 
     if valid_rule[key].get("min_len") and valid_rule[key].get("max_len"):
         if  valid_rule[key]["min_len"] < len(data_dict[key]) < valid_rule[key]["max_len"]:
-            print("true")
+            return True
         else:
-            print("false")
+            return False
     
     elif valid_rule[key].get("min_len"):
         if  valid_rule[key]["min_len"] < len(data_dict[key]):
-            print("true")
+            return True
         else:
-            print("false")
+            return False
 
     elif valid_rule[key].get("max_len"):
         if  valid_rule[key]["max_len"] > len(data_dict[key]):
-            print("true")
+            return True
         else:
-            print("false")
+            return False
     else:
-        print("true")
+        return False
 
 def validate_int(key,data_dict, valid_rule):
     if valid_rule[key].get("max_value") and valid_rule[key].get("min_value"):
         if  valid_rule[key]["min_value"] < data_dict[key] < valid_rule[key]["max_value"]:
-            print("true")
+            return True
         else:
-            print("false")
+           return False
     
     elif valid_rule[key].get("max_value"):
         if  valid_rule[key]["max_value"] < data_dict[key]:
-            print("true")
+            return True
         else:
-            print("false")
+            return False
 
     elif valid_rule[key].get("max_value"):
         if  valid_rule[key]["max_value"] > data_dict[key]:
-            print("true")
+            return True
         else:
-            print("false")
+            return False
     else:
-        print("true")
+        return True
+
 
 def validate_dict(data_dict, valid_rule):
+    valid = True
     for key in data_dict:
         if valid_rule.get(key):
             if valid_rule[key]["type"] == type(data_dict[key]):
                 if type(data_dict[key]) == str:
-                    validate_string(key,data_dict, valid_rule)
+                   valid = valid and validate_string(key,data_dict, valid_rule)
                 
                 if type(data_dict[key]) == int:
-                    validate_int(key,data_dict, valid_rule)
+                    valid = valid and validate_int(key,data_dict, valid_rule)
+
+                return valid
             else:
-                print("false")
+                return False
 
 
-validate_dict(data_dict, valid_rule)
+print(validate_dict(data_dict, valid_rule))
 
 
     
