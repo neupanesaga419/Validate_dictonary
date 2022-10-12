@@ -1,3 +1,6 @@
+from attr import validate
+
+
 valid_rule = {
     "name":{
         "type":str,
@@ -11,7 +14,7 @@ valid_rule = {
     }
 }
 
-data_dict = {"name":"Mero Sagar neupane ho","age":16}
+data_dict = {"name":"Mero","age":55}
 
 
 def validate_string(key,data_dict, valid_rule):
@@ -34,7 +37,7 @@ def validate_string(key,data_dict, valid_rule):
         else:
             return False
     else:
-        return False
+        return True
 
 def validate_int(key,data_dict, valid_rule):
     if valid_rule[key].get("max_value") and valid_rule[key].get("min_value"):
@@ -69,9 +72,8 @@ def validate_dict(data_dict, valid_rule):
                 if type(data_dict[key]) == int:
                     valid = valid and validate_int(key,data_dict, valid_rule)
 
-                return valid
-            else:
-                return False
+    return valid
+
 
 
 print(validate_dict(data_dict, valid_rule))
