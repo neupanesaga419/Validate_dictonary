@@ -1,6 +1,3 @@
-from attr import validate
-
-
 valid_rule = {
     "name":{
         "type":str,
